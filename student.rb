@@ -1,9 +1,9 @@
-require './person.rb'
+require './person'
 
 class Student < Person
   attr_accessor :classroom
 
-  def initialize(classroom, id, name, age)
+  def initialize(classroom, _id, name, age)
     super(name, age)
     @classroom = classroom
   end
@@ -11,5 +11,4 @@ class Student < Person
   def play_hooky
     '¯\(ツ)/¯'
   end
-
 end

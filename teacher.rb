@@ -1,4 +1,4 @@
-require './person.rb'
+require './person'
 
 class Teacher < Person
   attr_accessor :specialization
@@ -11,5 +11,4 @@ class Teacher < Person
   def can_use_service?
     true
   end
-
 end
