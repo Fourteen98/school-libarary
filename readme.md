@@ -3,6 +3,9 @@
 ## Made With
 - Ruby
 
+
+## UML Diagram
+![screenshot](uml_class_diagram.png)
 ## Getting Started
 
 ### Setup
