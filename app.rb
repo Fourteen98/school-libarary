@@ -2,7 +2,6 @@ require './book'
 require './rental'
 require './student'
 require './teacher'
-
 class App
   def initialize
     @books = []
@@ -45,7 +44,7 @@ class App
     name = gets.chomp
 
     print 'Age: '
-    age = gets.chomp.to_i
+    age = gets.chomp
 
     print 'Student Class: '
     classroom = gets.chomp
