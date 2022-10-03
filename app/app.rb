@@ -50,33 +50,16 @@ class App
     puts 'Person created successfully'
   end
 
-  def create_book
-    print 'Book Title: '
-    title = gets.chomp
-
-    print 'Book Author: '
-    author = gets.chomp
-
+  def create_book(title, author)
+    
     book = Book.new(title, author)
     @books.push(book)
-    puts 'Book created successfully'
   end
 
-  def create_rental
-    puts 'Select a book from the following list by number'
-    list_books
-    book_index = gets.chomp.to_i
-
-    puts 'Select a person from the following list by number (not id)'
-    list_people
-    person_index = gets.chomp.to_i
-
-    print 'Date: '
-    date = gets.chomp
-
+  def create_rental(date, book_index, person_index)
+    
     rental = Rental.new(date, @books[book_index], @people[person_index])
     @rentals.push(rental)
-    puts 'Rental created successfully'
   end
 
   def list_rentals_for_person_id
