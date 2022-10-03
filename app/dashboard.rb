@@ -1,24 +1,24 @@
 require_relative 'app'
 
 class Dashboard
-
   def initialize
     @my_app = App.new
   end
+
   def choices
     {
       1 => 'List all books',
       2 => 'List all people',
       3 => 'List all rentals for a given person id',
       4 => 'Create a book',
-      5 =>  'Create a person',
-      6 =>  'Create a rental',
-      7 =>  'Exit'
+      5 => 'Create a person',
+      6 => 'Create a rental',
+      7 => 'Exit'
     }
   end
 
   def main_menu
-    choices.each { |key, value| print "#{key} - #{value}\n"}
+    choices.each { |key, value| print "#{key} - #{value}\n" }
   end
 
   def options(input)
@@ -35,8 +35,6 @@ class Dashboard
       @my_app.create_person
     when '6'
       @my_app.create_rental
-    when '7'
-      puts 'Thank you for using this app!'
     else
       puts 'Invalid option'
     end
