@@ -1,7 +1,7 @@
-require './app'
+require './app/dashboard'
 
 def main
-  app = App.new
+  app = Dashboard.new
   app.run
 end
 

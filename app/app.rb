@@ -19,8 +19,8 @@ class App
 
   # list all people
   def list_people
-    @people.each do |person|
-      puts "Type: #{person.class}, Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
+    @people.each_with_index do |person, index|
+      puts "#{index}) -> Type: #{person.class}, Name: \"#{person.name}\", ID: #{person.id}, Age: #{person.age}"
     end
   end
 
@@ -111,14 +111,4 @@ class App
     end
   end
 
-  def run
-    loop do
-      dashboard
-      input = gets.chomp
-      break if input == '7'
-
-      option1(input)
-      option2(input)
-    end
-  end
 end
