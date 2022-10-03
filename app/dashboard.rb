@@ -95,7 +95,6 @@ class Dashboard
     puts 'Rental created successfully'
   end
 
-
   def options(input)
     case input
     when '1'

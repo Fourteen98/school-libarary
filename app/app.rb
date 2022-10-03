@@ -51,13 +51,11 @@ class App
   end
 
   def create_book(title, author)
-    
     book = Book.new(title, author)
     @books.push(book)
   end
 
   def create_rental(date, book_index, person_index)
-    
     rental = Rental.new(date, @books[book_index], @people[person_index])
     @rentals.push(rental)
   end
