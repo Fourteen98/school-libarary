@@ -2,6 +2,8 @@ require './book'
 require './rental'
 require './student'
 require './teacher'
+require 'pry'
+
 class App
   def initialize
     @books = []
@@ -45,7 +47,7 @@ class App
 
     print 'Age: '
     age = gets.chomp
-
+    binding.pry
     print 'Student Class: '
     classroom = gets.chomp
 
@@ -114,10 +116,10 @@ class App
     puts '----- Choose An Option -----'
     puts '1 - List all books'
     puts '2 - List all people'
-    puts '3 - Create a person'
+    puts '3 - List all rentals for a given person id'
     puts '4 - Create a book'
-    puts '5 - Create a rental'
-    puts '6 - List all rentals for a given person id'
+    puts '5 - Create a person'
+    puts '6 - Create a rental'
     puts '7 - Exit'
     puts '---------------------------'
   end
@@ -136,9 +138,9 @@ class App
   def option2(input)
     case input
     when '4'
-      create_person
-    when '5'
       create_book
+    when '5'
+      create_person
     when '6'
       create_rental
     when '7'
