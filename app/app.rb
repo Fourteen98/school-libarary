@@ -38,12 +38,9 @@ class App
     if person_type == 1
       print 'Student Class: '
       classroom = gets.chomp
-
       print 'Has parent permission? [Y/N]: '
       parent_permission = gets.chomp.downcase == 'y'
-
       student_or_teacher = Student.new(classroom: classroom, age: age, name: name, parent_permission: parent_permission)
-
     else
       print 'Specialization: '
       specialization = gets.chomp
@@ -51,7 +48,6 @@ class App
     end
     @people.push(student_or_teacher)
     puts 'Person created successfully'
-
   end
 
   def create_book
