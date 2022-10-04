@@ -4,6 +4,7 @@ require './classes/student'
 require './classes/teacher'
 
 class App
+  attr_accessor :books, :people, :rentals
   def initialize
     @books = []
     @people = []
@@ -68,4 +69,5 @@ class App
       puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}" if rental.person.id == id
     end
   end
+
 end

@@ -125,6 +125,25 @@ class Dashboard
       FileUtils.touch('books.json')
       FileUtils.touch('people.json')
       FileUtils.touch('rentals.json')
+
+      # generate json object
+      books_json = []
+      @my_app.books.each do |book|
+        books_json << book.to_json
+      end
+
+      people_json = []
+      @my_app.books.each do |people|
+        people_json << people.to_json
+      end
+
+      rentals_json = []
+      @my_app.rentals.each do |rental|
+        rentals_json << rental.to_json
+      end
+
+      # save books data
+      File.open('')
     end
   end
 
