@@ -142,8 +142,10 @@ class Dashboard
         rentals_json << rental.to_json
       end
 
-      # save books data
-      File.open('')
+      # write data to their respective files
+      File.write('books.json', books_json)
+      File.write('people.json', people_json)
+      File.write('rentals.json', rentals_json)
     end
   end
 
