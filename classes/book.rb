@@ -7,6 +7,13 @@ class Book
     @rentals = []
   end
 
+  def export_json
+    {
+      'title' => @title,
+      'author' => @author
+    }
+  end
+
   def add_rental(rental)
     @rentals.push(rental)
     rental.book = self

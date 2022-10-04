@@ -8,6 +8,15 @@ class Teacher < Person
     @specialization = specialization
   end
 
+  def export_json
+    {
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'specialization' => @specialization
+    }
+  end
+
   def can_use_service?
     true
   end

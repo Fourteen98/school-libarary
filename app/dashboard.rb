@@ -32,7 +32,7 @@ class Dashboard
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp.downcase == 'y'
 
-    @my_app.create_student(classroom, age, name, parent_permission)
+    @my_app.create_person(classroom, age, name, parent_permission)
     puts 'Person created successfully'
   end
 
@@ -46,7 +46,7 @@ class Dashboard
     print 'Specialization: '
     specialization = gets.chomp
 
-    @my_app.create_teacher(age, specialization, name)
+    @my_app.create_person(age, specialization, name)
     puts 'Person created successfully'
   end
 
@@ -116,11 +116,11 @@ class Dashboard
     end
   end
 
-  def convert_json(data)
-    result = []
-    data.each { |item| result << JSON.generate("title:#{item.title} author:#{item.author}")}
-    result
-  end
+  # def convert_json(data)
+  #   result = []
+  #   data.each { |item| result << JSON.generate("title:#{item.title} author:#{item.author}")}
+  #   result
+  # end
 
   def save_data
     Dir.mkdir('./app_data/') unless Dir.exists?('./app_data/')
@@ -133,15 +133,17 @@ class Dashboard
       FileUtils.touch('rentals.json')
 
       # generate json object
-      books_json = convert_json(@my_app.books)
-      books_json.each { |item| puts JSON.parse(item)}
-
+      books_json = []
+      @my_app.books.each { |book| books_json << JSON.generate(book.export_json)}
+      people_json = []
+      @my_app.people.each { |person| people_json << JSON.generate(person.export_json)}
+      rentals_json = []
+      @my_app.rentals.each { |rental| rentals_json << JSON.generate(rental.export_json)}
     
-
       # write data to their respective files
       File.write('books.json', books_json)
-      #File.write('people.json', people_json)
-      #File.write('rentals.json', rentals_json)
+      File.write('people.json', people_json)
+      File.write('rentals.json', rentals_json)
     end
   end
 
