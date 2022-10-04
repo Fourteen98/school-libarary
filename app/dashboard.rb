@@ -116,36 +116,32 @@ class Dashboard
     end
   end
 
+  def convert_json(data)
+    result = []
+    data.each { |item| result << JSON.generate("title:#{item.title} author:#{item.author}")}
+    result
+  end
+
   def save_data
     Dir.mkdir('./app_data/') unless Dir.exists?('./app_data/')
     FileUtils.cd('./app_data/') do
-      File.remove('books.json') if File.exists?('books.json')
-      File.remove('people.json') if File.exists?('people.json')
-      File.remove('rentals.json') if File.exists?('rentals.json')
+      FileUtils.remove('books.json') if File.exists?('books.json')
+      FileUtils.remove('people.json') if File.exists?('people.json')
+      FileUtils.remove('rentals.json') if File.exists?('rentals.json')
       FileUtils.touch('books.json')
       FileUtils.touch('people.json')
       FileUtils.touch('rentals.json')
 
       # generate json object
-      books_json = []
-      @my_app.books.each do |book|
-        books_json << book.to_json
-      end
+      books_json = convert_json(@my_app.books)
+      books_json.each { |item| puts JSON.parse(item)}
 
-      people_json = []
-      @my_app.books.each do |people|
-        people_json << people.to_json
-      end
-
-      rentals_json = []
-      @my_app.rentals.each do |rental|
-        rentals_json << rental.to_json
-      end
+    
 
       # write data to their respective files
       File.write('books.json', books_json)
-      File.write('people.json', people_json)
-      File.write('rentals.json', rentals_json)
+      #File.write('people.json', people_json)
+      #File.write('rentals.json', rentals_json)
     end
   end
 
