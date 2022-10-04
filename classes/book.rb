@@ -9,8 +9,8 @@ class Book
 
   def export_json
     {
-      'title' => @title,
-      'author' => @author
+      'Title' => @title,
+      'Author' => @author
     }
   end
 

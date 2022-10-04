@@ -105,7 +105,17 @@ class Dashboard
     end
   end
 
+  def read_data
+    if File.exists?('./app_data/books.json')
+      books = []
+      File.foreach('./app_data/books.json') { |book| books << JSON.parse(book)}
+      books.each { |book| book.each {|book| @my_app.create_book(JSON.parse(book)['Title'], JSON.parse(book)['Author'])}}
+    end
+  end
+
   def run
+    read_data
+    
     loop do
       main_menu
       input = gets.chomp
