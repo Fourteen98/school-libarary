@@ -19,51 +19,9 @@ class Dashboard
     }
   end
 
-  def create_student
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Age: '
-    age = gets.chomp
-
-    print 'Student Class: '
-    classroom = gets.chomp
-
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase == 'y'
-
-    @my_app.create_person(classroom, age, name, parent_permission)
-    puts 'Person created successfully'
-  end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp
-
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Specialization: '
-    specialization = gets.chomp
-
-    @my_app.create_person(age, specialization, name)
-    puts 'Person created successfully'
-  end
-
   # create a person (teacher or student, not a plain Person)
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    person_type = gets.chomp
-
-    case person_type
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    else
-      puts 'Invalid option'
-      nil
-    end
+    @my_app.create_person
   end
 
   def main_menu
@@ -123,23 +81,23 @@ class Dashboard
   # end
 
   def save_data
-    Dir.mkdir('./app_data/') unless Dir.exists?('./app_data/')
+    FileUtils.mkdir_p('./app_data/')
     FileUtils.cd('./app_data/') do
-      FileUtils.remove('books.json') if File.exists?('books.json')
-      FileUtils.remove('people.json') if File.exists?('people.json')
-      FileUtils.remove('rentals.json') if File.exists?('rentals.json')
+      FileUtils.rm_f('books.json')
+      FileUtils.rm_f('people.json')
+      FileUtils.rm_f('rentals.json')
       FileUtils.touch('books.json')
       FileUtils.touch('people.json')
       FileUtils.touch('rentals.json')
 
       # generate json object
       books_json = []
-      @my_app.books.each { |book| books_json << JSON.generate(book.export_json)}
+      @my_app.books.each { |book| books_json << JSON.generate(book.export_json) }
       people_json = []
-      @my_app.people.each { |person| people_json << JSON.generate(person.export_json)}
+      @my_app.people.each { |person| people_json << JSON.generate(person.export_json) }
       rentals_json = []
-      @my_app.rentals.each { |rental| rentals_json << JSON.generate(rental.export_json)}
-    
+      @my_app.rentals.each { |rental| rentals_json << JSON.generate(rental.export_json) }
+
       # write data to their respective files
       File.write('books.json', books_json)
       File.write('people.json', people_json)

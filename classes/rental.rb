@@ -16,5 +16,4 @@ class Rental
       'person' => @person.export_json
     }
   end
-  
 end
