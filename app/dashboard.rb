@@ -1,3 +1,5 @@
+require 'fileutils'
+require 'json'
 require_relative 'app'
 
 class Dashboard
@@ -114,10 +116,23 @@ class Dashboard
     end
   end
 
+  def save_data
+    Dir.mkdir('./app_data/') unless Dir.exists?('./app_data/')
+    FileUtils.cd('./app_data/') do
+      File.remove('books.json') if File.exists?('books.json')
+      File.remove('people.json') if File.exists?('people.json')
+      File.remove('rentals.json') if File.exists?('rentals.json')
+      FileUtils.touch('books.json')
+      FileUtils.touch('people.json')
+      FileUtils.touch('rentals.json')
+    end
+  end
+
   def run
     loop do
       main_menu
       input = gets.chomp
+      save_data if input == '7'
       break if input == '7'
 
       options(input)
