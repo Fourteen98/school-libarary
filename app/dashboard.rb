@@ -118,7 +118,7 @@ class Dashboard
 
   def convert_json(data)
     result = []
-    data.each { |item| result << JSON.generate("title:#{item.title} author:#{item.author}")}
+    data.each { |item| result << JSON.generate(%W[title:#{item.title} author:#{item.author}]) } #=> "{\"title\":\"Oliver twist\", \"author \" : \"Elias\"}"
     result
   end
 
@@ -135,8 +135,6 @@ class Dashboard
       # generate json object
       books_json = convert_json(@my_app.books)
       books_json.each { |item| puts JSON.parse(item)}
-
-    
 
       # write data to their respective files
       File.write('books.json', books_json)
