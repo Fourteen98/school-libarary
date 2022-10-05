@@ -105,36 +105,58 @@ class Dashboard
     end
   end
 
-  def read_data
-    if File.exists?('./app_data/books.json')
-      books = []
-      File.foreach('./app_data/books.json') { |book| books << JSON.parse(book)}
-      books.each { |book| book.each {|book| @my_app.create_book(JSON.parse(book)['Title'], JSON.parse(book)['Author'])}}
-    end
+  def read_books_from_file
+    return unless File.exist?('./app_data/books.json')
 
-    if File.exists?('./app_data/people.json')
-      puts 'read people'
-      people = []
-      File.foreach('./app_data/people.json') { |line| people << JSON.parse(line)}
-    
-      people.each do |people| people.each do
-        |person|
-        if !person['classroom'].nil?
-          @my_app.people << Student.new(classroom: JSON.parse(person)['classroom'], age: JSON.parse(person)['age'], name: JSON.parse(person)['name'], parent_permission: JSON.parse(person)['parent_permission'], id: JSON.parse(person)['id'])
-         # @people << Student.new(JSON.parse(person)['age'], JSON.parse(person)['name'], JSON.parse(person)['parent_permission'], id: JSON.parse(person)['id'])
-        else
-          puts JSON.parse(person)['id']
-          @my_app.people << Teacher.new(JSON.parse(person)['age'], JSON.parse(person)['specialization'], JSON.parse(person)['name'], id: JSON.parse(person)['id'])
-          # @people << Teacher.new(JSON.parse(person)['specialization'], JSON.parse(person)['age'], JSON.parse(person)['name'], parent_permission: JSON.parse(person)['parent_permission'], id: JSON.parse(person)['id'])
-        end
-      end
+    books = []
+    File.foreach('./app_data/books.json') { |book| books << JSON.parse(book) }
+    books.each do |book|
+      book.each do |single_book|
+        @my_app.create_book(JSON.parse(single_book)['Title'], JSON.parse(single_book)['Author'])
       end
     end
   end
 
+  def read_people_from_file
+    return unless File.exist?('./app_data/people.json')
+
+    people = []
+    File.foreach('./app_data/people.json') { |line| people << JSON.parse(line) }
+
+    people.each do |each_person|
+      each_person.each do |person|
+        if person['classroom'].nil?
+          @my_app.people << Teacher.new(JSON.parse(person)['age'], JSON.parse(person)['specialization'],
+                                        JSON.parse(person)['name'], id: JSON.parse(person)['id'])
+        else
+          @my_app.people << Student.new(classroom: JSON.parse(person)['classroom'], age: JSON.parse(person)['age'],
+                                        name: JSON.parse(person)['name'], parent_permission:
+                                          JSON.parse(person)['parent_permission'], id: JSON.parse(person)['id'])
+        end
+      end
+    end
+  end
+
+  def read_rentals_from_file
+    return unless File.exist?('./app_data/rentals.json')
+
+    rentals = JSON.parse(File.read('./app_data/rentals.json'))
+    rentals.each do |rental|
+      r = JSON.parse(rental)
+      person = @my_app.people.select { |single_person| single_person.id.to_i == r['person']['id'].to_i }
+
+      b = r['book']['Title'] + r['book']['Author']
+      book = @my_app.books.select { |single_book| (single_book.title + single_book.author) == b }
+
+      @my_app.rentals << Rental.new(r['date'], book[0], person[0])
+    end
+  end
+
   def run
-    read_data
-    
+    read_books_from_file
+    read_people_from_file
+    read_rentals_from_file
+
     loop do
       main_menu
       input = gets.chomp
