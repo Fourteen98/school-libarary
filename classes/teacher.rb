@@ -3,13 +3,14 @@ require_relative './person'
 class Teacher < Person
   attr_accessor :specialization
 
-  def initialize(specialization, name, age)
-    super(name, age)
+  def initialize(specialization, name, age, id:)
+    super(name, age, id: id)
     @specialization = specialization
   end
 
   def export_json
     {
+      'id' => @id,
       'name' => @name,
       'age' => @age,
       'parent_permission' => @parent_permission,
