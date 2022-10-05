@@ -147,7 +147,6 @@ class Dashboard
 
       b = r['book']['Title'] + r['book']['Author']
       book = @my_app.books.select { |single_book| (single_book.title + single_book.author) == b }
-
       @my_app.rentals << Rental.new(r['date'], book[0], person[0])
     end
   end
