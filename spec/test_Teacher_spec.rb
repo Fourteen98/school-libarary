@@ -10,12 +10,10 @@ describe Teacher do
     end
 
     it "Should return '22' as a teacher age" do
-      puts teacher.name
       expect(teacher.age).to eq 22
     end 
     
     it "Should return 'Math' as a teacher specialization" do
-      puts teacher.name
       expect(teacher.specialization).to eq 'Math'
     end 
   end
