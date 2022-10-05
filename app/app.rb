@@ -4,6 +4,8 @@ require './classes/student'
 require './classes/teacher'
 
 class App
+  attr_accessor :books, :people, :rentals
+
   def initialize
     @books = []
     @people = []
@@ -35,7 +37,7 @@ class App
     print 'Age: '
     age = gets.chomp
 
-    if person_type == 1
+    if person_type == '1'
       print 'Student Class: '
       classroom = gets.chomp
       print 'Has parent permission? [Y/N]: '

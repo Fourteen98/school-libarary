@@ -3,9 +3,19 @@ require_relative 'person'
 class Student < Person
   attr_reader :classroom
 
-  def initialize(classroom:, age:, name: 'Unknown', parent_permission: true)
-    super(age, name, parent_permission: parent_permission)
+  def initialize(classroom:, age:, id: nil, name: 'Unknown', parent_permission: true)
+    super(age, name, parent_permission: parent_permission, id: id)
     @classroom = classroom
+  end
+
+  def export_json
+    {
+      'id' => @id,
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'classroom' => @classroom
+    }
   end
 
   def play_hooky
