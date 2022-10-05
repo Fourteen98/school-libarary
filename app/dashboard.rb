@@ -120,14 +120,12 @@ class Dashboard
   def read_people_from_file
     return unless File.exist?('./app_data/people.json')
 
-    puts 'read people'
     people = []
     File.foreach('./app_data/people.json') { |line| people << JSON.parse(line) }
 
     people.each do |each_person|
       each_person.each do |person|
         if person['classroom'].nil?
-          puts JSON.parse(person)['id']
           @my_app.people << Teacher.new(JSON.parse(person)['age'], JSON.parse(person)['specialization'],
                                         JSON.parse(person)['name'], id: JSON.parse(person)['id'])
         else
@@ -146,12 +144,10 @@ class Dashboard
     rentals.each do |rental|
       r = JSON.parse(rental)
       person = @my_app.people.select { |single_person| single_person.id.to_i == r['person']['id'].to_i }
-      puts person[0]
 
       b = r['book']['Title'] + r['book']['Author']
       book = @my_app.books.select { |single_book| (single_book.title + single_book.author) == b }
-      puts book[0]
-      puts r['date']
+
       @my_app.rentals << Rental.new(r['date'], book[0], person[0])
     end
   end
