@@ -161,6 +161,7 @@ class Dashboard
       input = gets.chomp
       save_data if input == '7'
       break if input == '7'
+
       options(input)
     end
   end
