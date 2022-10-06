@@ -11,5 +11,14 @@ describe Person do
     it "It should return 'Idrees' as the Person name " do
       expect(person.name).to eq 'Idrees'
     end
+
+    it 'can_use_services of Person class should return true or false' do
+      expect(person.can_use_services?).to eq true
+    end
+
+    it "It should return 'Idrees' from correct_name? " do
+      expect(person.correct_name).to eq 'Idrees'
+    end
+
   end
 end
