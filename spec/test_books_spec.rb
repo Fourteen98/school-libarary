@@ -7,7 +7,7 @@ describe Book do
     book = Book.new('Oliver Twist', 'Jafer Yousef')
     student1 = Student.new(classroom: 'Maths class', age: '22', id: '222', name: 'Jafer Yousef')
     rental = Rental.new('2022', book, student1)
-    book.rentals.push(rental)
+    book.add_rental(rental)
 
     it "Should return  'Oliver Twist' as Book name" do
       expect(book.title).to eq 'Oliver Twist'
@@ -17,8 +17,8 @@ describe Book do
       expect(book.author).to eq 'Jafer Yousef'
     end
 
-    it 'The length of Book.rentals[] should be 1' do
-      expect(book.rentals.length).to be > 0
+    it 'The length of Book.rentals[] should be 2' do
+      expect(book.rentals.length).to eq 2
     end
   end
 end

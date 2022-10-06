@@ -10,6 +10,10 @@ describe ClassRoom do
     classroom.add_student(student1)
     classroom.add_student(student2)
 
+    it 'Should return "Math Class" as a label value' do
+      expect(classroom.label).to eq 'Maths Class'
+    end
+
     it 'Should check student1 exist in classroom.student  ' do
       expect(classroom.students[0]).to eq student1
     end
