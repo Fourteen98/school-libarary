@@ -19,6 +19,5 @@ describe Person do
     it "It should return 'Idrees' from correct_name? " do
       expect(person.correct_name).to eq 'Idrees'
     end
-
   end
 end

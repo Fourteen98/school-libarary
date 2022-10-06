@@ -10,5 +10,9 @@ describe Student do
     it "Should return '22' as the Student age" do
       expect(student.age).to eq 22
     end
+
+    it "Should return '¯\(ツ)/¯' as the student name" do
+      expect(student.play_hooky).to eq '¯\(ツ)/¯'
+    end
   end
 end
