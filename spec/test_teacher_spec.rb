@@ -16,5 +16,9 @@ describe Teacher do
     it "Should return 'Math' as a teacher specialization" do
       expect(teacher.specialization).to eq 'Math'
     end
+
+    it "can_use_service method from teacher class should return 'true'" do
+      expect(teacher.can_use_service?).to eq true
+    end
   end
 end
