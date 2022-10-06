@@ -3,6 +3,7 @@ require_relative '../classes/teacher'
 describe Teacher do
   context 'When creating a Teacher' do
     teacher = Teacher.new('Math', 22, 'Elias')
+
     it "Should return 'Elias' as a teacher name" do
       puts teacher.name
       expect(teacher.name).to eq 'Elias'
